@@ -1,64 +1,70 @@
-# **BlockSafe: Decentralized Data Framework (DDF)**  
+# Getting Started with Create React App
 
-BlockSafe is a **Decentralized Data Framework** designed to securely store, share, and manage sensitive data using blockchain technology. It serves as a flexible and scalable solution for building decentralized applications (dApps) across various industries, such as healthcare, voting, and certificate verification.  
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Our first application built on **BlockSafe** is a **Medical Record System**, ensuring the privacy, security, and accessibility of medical data for patients, hospitals, and insurance providers.
+## Available Scripts
 
----
+In the project directory, you can run:
 
-## **Features**
-- **Decentralized Architecture**: Eliminates single points of failure.
-- **Data Transparency**: Immutable records for full traceability.
-- **Cryptographic Security**: Ensures data integrity and authorized access.
-- **Customizable Framework**: Adaptable to multiple use cases, including:
-  - Medical Records
-  - Voting Systems
-  - Supply Chain Management
-  - Certificate Verification
+### `npm start`
 
----
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-## **Technologies Used**
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-| **Layer**              | **Tools/Technologies**                                                                            |
-|------------------------|---------------------------------------------------------------------------------------------------|
-| **Blockchain**         | Ethereum/Polygon                                                                                 |
-| **Smart Contracts**    | Solidity                                                                                         |
-| **Data Storage**       | IPFS/Filecoin                                                                                     |
-| **Backend**            | Flask/Django (Python) or Node.js                                                                 |
-| **Frontend**           | React + Web3.js                                                                                  |
-| **Wallet Integration** | MetaMask                                                                                         |
-| **Development Tools**  | Hardhat, Remix IDE                                                                               |
-| **Deployment**         | Ropsten or Polygon Mumbai Testnets                                                               |
+### `npm test`
 
----
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-## **How BlockSafe Works**
+### `npm run build`
 
-1. **Data Submission**: Sensitive data (e.g., medical records) is encrypted and stored off-chain using **IPFS/Filecoin**.
-2. **Blockchain Logging**: The hash of the stored data is logged on the blockchain, ensuring data integrity and transparency.
-3. **Access Control**: Patients (data owners) use their wallets to grant/revoke access to specific entities like hospitals or insurers.
-4. **Transparency**: All access requests and transactions are recorded immutably on the blockchain.
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
----
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-## **Medical Record System (Use Case)**
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### **Overview**
-The **Medical Record System** is a dApp built using BlockSafe to securely store and share medical data.  
-- Patients control their records using their wallets.  
-- Hospitals upload records, which are stored in IPFS.  
-- Access permissions are logged and managed on the blockchain.
+### `npm run eject`
 
----
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-### **Setup Instructions**
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-#### **Prerequisites**
-- Node.js installed  
-- MetaMask wallet  
-- Ethereum development environment (e.g., Hardhat)  
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-<img width="503" alt="image" src="https://github.com/user-attachments/assets/2a979bf4-9068-4dc0-beae-b002cde07930">
+## Learn More
 
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
