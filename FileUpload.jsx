@@ -1,17 +1,22 @@
 import React, { useState } from "react";
 import { Client, Storage, ID } from "appwrite";
+import axios from "axios";
 
+// Initialize Appwrite client and storage
 const client = new Client()
-  .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-  .setProject(''); // Replace with your Project ID
+  .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
+  .setProject(""); // Replace with your Project ID
 
 const storage = new Storage(client);
+const PINATA_API_KEY = process.env.REACT_APP_PINATA_API_KEY;
+const PINATA_SECRET_KEY = process.env.REACT_APP_PINATA_SECRET_KEY;
 
 const FileUpload = () => {
   const [file, setFile] = useState(null);
   const [status, setStatus] = useState("");
   const [isUploading, setIsUploading] = useState(false);
 
+  // Handle file selection
   const handleFileChange = (e) => {
     const uploadedFile = e.target.files[0];
     if (uploadedFile) {
@@ -20,6 +25,7 @@ const FileUpload = () => {
     }
   };
 
+  // Handle file upload submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -32,11 +38,37 @@ const FileUpload = () => {
     setStatus("Uploading...");
 
     try {
-      const bucketId = ""; // Replace with your Bucket ID
-      const response = await storage.createFile(bucketId, ID.unique(), file);
+      // Upload to IPFS using Pinata API
+      const fileData = new FormData();
+      fileData.append("file", file);
+      const ipfsResponse = await axios.post(
+        "https://api.pinata.cloud/pinning/pinFileToIPFS",
+        fileData,
+        {
+          headers: {
+            pinata_api_key: PINATA_API_KEY,
+            pinata_secret_api_key: PINATA_SECRET_KEY,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      const ipfsLink = `https://gateway.pinata.cloud/ipfs/${ipfsResponse.data.IpfsHash}`;
 
-      setStatus("File uploaded successfully! File ID: " + response.$id);
-      console.log("File uploaded: ", response);
+      // Store CID link in Appwrite Storage
+      const bucketId = ""; // Replace with your Appwrite Bucket ID
+      const fileBlob = new Blob([file], { type: file.type });
+      const fileId = ID.unique();
+
+      const fileUploadResponse = await storage.createFile(
+        bucketId,
+        fileId,
+        fileBlob
+      );
+      setStatus(
+        `File uploaded successfully! File ID: ${fileUploadResponse.$id}`
+      );
+      console.log("File uploaded to Appwrite: ", fileUploadResponse);
+      console.log("File uploaded to IPFS: ", ipfsLink);
     } catch (error) {
       setStatus(`Error: ${error.message}`);
       console.error("Error uploading file: ", error);
@@ -46,23 +78,33 @@ const FileUpload = () => {
   };
 
   return (
-    <div className="file-upload-container">
+    <div className="upload-container">
       <div className="upload-box">
-        <h2>Upload Your File</h2>
-        <p>Upload files related to your health records or blockchain data.</p>
+        <h2>Health Blockchain File Upload</h2>
+        <p>
+          Securely upload files related to health records or blockchain data.
+        </p>
 
         <form onSubmit={handleSubmit}>
-          <input
-            type="file"
-            onChange={handleFileChange}
-            accept="image/*,application/pdf"
-          />
+          <div className="input-container">
+            <input
+              type="file"
+              onChange={handleFileChange}
+              accept="image/*,application/pdf"
+            />
+          </div>
           <button type="submit" className="upload-btn" disabled={isUploading}>
             {isUploading ? "Uploading..." : "Upload File"}
           </button>
         </form>
 
-        <div className={status.includes("Error") ? "error" : "success"}>
+        <div
+          className={
+            status.includes("Error")
+              ? "status-message error"
+              : "status-message success"
+          }
+        >
           {status}
         </div>
       </div>
